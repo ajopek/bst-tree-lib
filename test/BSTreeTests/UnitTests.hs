@@ -40,7 +40,7 @@ test_isValidInvalidTree = TestCase (do
   )
 
 test_containFive = TestCase (do
-  assertEqual "Tree with key equal 5 return false" True (conatins validTree 5)
+  assertEqual "Tree with key equal 5 return false" True (contains validTree 5)
   )
 
 test_minKey = TestCase (do
@@ -59,4 +59,12 @@ test_heightTree = TestCase (do
   assertEqual "Height of tree is not equal 2" 2 (heightBST validTree)
   )
 
-unitTests = TestList [test_isValidValidTree, test_isValidInvalidTree]
+unitTests = TestList [
+           test_isValidValidTree,
+           test_isValidInvalidTree,
+           test_containFive,
+           test_minKey,
+           test_maxKey,
+           test_compareOfTrees,
+           test_heightTree
+           ]
