@@ -9,19 +9,6 @@ import BSTree.Internal
 -- tests deps
 import Test.HUnit
 
-
-isValid (Node left val right) = bigger right && smaller left
-    where
-      bigger (Node left x right)
-          | x >= val = isValid left && isValid right
-          | otherwise = False
-      bigger (Leaf) = True
-      smaller (Node left x right)
-          | x <= val = isValid left && isValid right
-          | otherwise = False
-      smaller (Leaf) = True
-isValid (Leaf) = True
-
 validTree =
     (Node
     (Node (Leaf) 3 (Leaf))

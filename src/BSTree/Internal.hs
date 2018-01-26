@@ -42,7 +42,7 @@ module BSTree.Internal where
       deleteRoot (Node tree1 value Leaf)  = tree1
       deleteRoot (Node tree1 value tree2) = (Node tree1 minTree (deleteFromBST tree2 minTree))
                                          where
-                                              minTree = leftBST tree2 
+                                              minTree = leftBST tree2
       -- | Delete key from tree
 
       deleteFromBST :: (Ord a) => BST a -> a -> BST a
@@ -92,3 +92,17 @@ module BSTree.Internal where
       heightBST :: (Ord a) => BST a -> Int
       heightBST Leaf                     = 0
       heightBST (Node tree1 value tree2) = 1 + max (heightBST tree1) (heightBST tree2)
+
+
+      -- | Check if valid
+      isValid (Node left val right) = bigger right && smaller left
+          where
+            bigger (Node left x right)
+                | x >= val = isValid left && isValid right
+                | otherwise = False
+            bigger (Leaf) = True
+            smaller (Node left x right)
+                | x <= val = isValid left && isValid right
+                | otherwise = False
+            smaller (Leaf) = True
+      isValid (Leaf) = True
