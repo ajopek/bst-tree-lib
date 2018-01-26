@@ -40,15 +40,16 @@ module BSTree.Internal where
       deleteRoot :: (Ord a) => BST a -> BST a
       deleteRoot (Node Leaf value tree2)  = tree2
       deleteRoot (Node tree1 value Leaf)  = tree1
-      deleteRoot (Node tree1 value tree2) = (Node tree1 (leftBST tree2) tree2)
-
+      deleteRoot (Node tree1 value tree2) = (Node tree1 minTree (deleteFromBST tree2 minTree))
+                                         where
+                                              minTree = leftBST tree2 
       -- | Delete key from tree
 
       deleteFromBST :: (Ord a) => BST a -> a -> BST a
       deleteFromBST Leaf _ = Leaf
       deleteFromBST (Node tree1 value tree2) x
                | x == value = deleteRoot (Node tree1 value tree2)
-               | x < value  = Node (deleteFromBST tree2 x) value tree2
+               | x < value  = Node (deleteFromBST tree1 x) value tree2
                | x > value  = Node tree1 value (deleteFromBST tree2 x)
 
       -- | Insert value from list to tree
