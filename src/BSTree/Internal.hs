@@ -87,6 +87,9 @@ module BSTree.Internal where
       compareBST :: (Ord a) => BST a -> BST a -> Bool
       compareBST tree1 tree2 = (inorderBST tree1 == inorderBST tree2)
 
+      instance Ord a =>  Eq (BST a) where
+        t1 == t2 = compareBST t1 t2
+
       -- | Get height of BST
 
       heightBST :: (Ord a) => BST a -> Int
